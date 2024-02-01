@@ -1,11 +1,26 @@
 package org.example;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public abstract class Tag {
     private String id;
     private String tagName;
     private String text;
+    private List<Tag> children;
 
-    public Tag() {}
+    public Tag() {
+        children = new ArrayList<>();
+    }
+
+    public List<Tag> getChildren() {
+        return children;
+    }
+
+    public void setChildren(List<Tag> children) {
+        this.children = children;
+    }
+
     public String getId() {
         return id;
     }
@@ -35,7 +50,13 @@ public abstract class Tag {
         return "Tag{" +
                 "id='" + id + '\'' +
                 ", tagName='" + tagName + '\'' +
-                ", text='" + text + '\'' +
+                ", text='" + text + '\'' + this.children.size() +
                 '}';
+    }
+
+    public String toHTMLString() {
+        String s1 = "<" + tagName + ">";
+        s1 += text + "</" + tagName + ">";
+        return s1;
     }
 }

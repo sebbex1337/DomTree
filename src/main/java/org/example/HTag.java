@@ -4,8 +4,8 @@ public class HTag extends Tag {
     private byte number;
 
     public HTag(int hnum) {
-        this.number = (byte)hnum;
-        this.setTagName("h" + number);
+        number = (byte)hnum;
+        this.setNumber(number);
     }
 
     public byte getNumber() {
@@ -14,9 +14,10 @@ public class HTag extends Tag {
 
     public void setNumber(byte number) {
         this.number = number;
+        this.setTagName("h" + number);
     }
     public void setNumber(int number) {
-        this.number = (byte) number;
+        this.setNumber((byte) number);
     }
 
     @Override
