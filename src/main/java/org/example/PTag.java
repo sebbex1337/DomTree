@@ -1,8 +1,12 @@
 package org.example;
 
 public class PTag extends Tag {
+    public PTag() {
+        this.setTagName("p");
+    }
+
     public PTag(String text) {
-        this.setText(text);
-        this.setTagName("span");
+        this();
+        super.setText(text);
     }
 }

@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public abstract class Tag {
+    private static int nextId = 0;
     private String id;
     private String tagName;
     private String text;
@@ -13,6 +14,7 @@ public abstract class Tag {
     private String color = ""; // #141414
 
     public Tag() {
+        id = "" + Tag.nextId++;
         children = new ArrayList<>();
     }
 
@@ -87,6 +89,10 @@ public abstract class Tag {
         return s1;
     }
 
+    public boolean hasLineShift() {
+        return true;
+    }
+
     public String toHTMLString() {
         String s1 = "<" + tagName;
         if (this.getColor().length() > 0) {
@@ -95,9 +101,13 @@ public abstract class Tag {
         s1 += ">";
         for (Tag tag: children) {
             String child = tag.toHTMLString();
-            s1 += child;
+            if (this.hasLineShift()) {
+                s1 += "\n" + child;
+            } else {
+                s1 += child;
+            }
         }
-        s1 += text + "</" + tagName + ">" + "\n";
+        s1 += text + "</" + tagName + ">";
         return s1;
     }
 

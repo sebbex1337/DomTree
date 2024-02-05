@@ -8,6 +8,11 @@ public class HTag extends Tag {
         this.setNumber(number);
     }
 
+    public HTag(int hnum, String text) {
+        this(hnum);
+        super.setText(text);
+    }
+
     public byte getNumber() {
         return number;
     }
