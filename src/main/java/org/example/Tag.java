@@ -4,8 +4,9 @@ import java.io.BufferedWriter;
 import java.io.FileWriter;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
-public abstract class Tag {
+public abstract class Tag implements Comparable<Tag> {
     private static int nextId = 0;
     private String id;
     private String tagName;
@@ -16,6 +17,11 @@ public abstract class Tag {
     public Tag() {
         id = "" + Tag.nextId++;
         children = new ArrayList<>();
+    }
+
+    @Override
+    public int compareTo(Tag o) {
+        return this.getId().compareTo(o.getId());
     }
 
     public String getColor() {
@@ -120,5 +126,18 @@ public abstract class Tag {
             e.printStackTrace();
         }
         return filename;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Tag tag = (Tag) o;
+        return Objects.equals(id, tag.id);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id);
     }
 }
